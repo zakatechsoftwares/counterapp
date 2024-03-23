@@ -11,6 +11,7 @@ import {
   increment,
   decrement,
   increaseByAmount,
+  decreaseByAmount,
   reset,
 } from "./redux-store/counterSlice";
 import { Form } from "react-bootstrap";
@@ -26,14 +27,13 @@ function App() {
   };
 
   return (
-    <Container>
-      <Row>
+    <Container fluid>
+      <Row className="pb-3">
         <Col>
-          <p className="display-4">The Counter: {count}</p>
+          <p className="display-4">The Count: {count}</p>
           <Form.Control
-            id="formInput"
             type="number"
-            placeholder="Enter the number you want to increase with"
+            placeholder="Enter the number you want to increase or decrease with"
             onChange={(e: ChangeEvent<HTMLInputElement>) =>
               setAmount(Number(e.target.value))
             }
@@ -42,10 +42,12 @@ function App() {
       </Row>
       <Row>
         <Col>
-          <Button>-10</Button>
+          <Button onClick={() => dispatch(decreaseByAmount(amount))}>
+            Decrease by {amount}
+          </Button>
         </Col>
         <Col>
-          <Button onClick={() => dispatch(decrement())}>-</Button>
+          <Button onClick={() => dispatch(decrement())}>-1</Button>
         </Col>
         <Col>
           <Button
@@ -58,11 +60,11 @@ function App() {
           </Button>
         </Col>
         <Col>
-          <Button onClick={() => dispatch(increment())}>+</Button>
+          <Button onClick={() => dispatch(increment())}>+1</Button>
         </Col>
         <Col>
           <Button onClick={() => dispatch(increaseByAmount(amount))}>
-            +{amount}
+            Increase by {amount}
           </Button>
         </Col>
       </Row>
